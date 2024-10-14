@@ -9,4 +9,5 @@ type Order struct {
 	Price     float64
 	Quantity  int
 	Timestamp time.Time
+	Status    string
 }

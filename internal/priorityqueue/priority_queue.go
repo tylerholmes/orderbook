@@ -18,7 +18,7 @@ func (pq PriorityQueue) Swap(i, j int) {
 }
 
 func (pq *PriorityQueue) Push(x any) {
-	*pq = append(*pq, x.(*models.Order))
+	heap.Push(pq, x.(*models.Order))
 }
 
 func (pq *PriorityQueue) Pop() any {
@@ -28,6 +28,10 @@ func (pq *PriorityQueue) Pop() any {
 	old[n-1] = nil
 	*pq = old[0 : n-1]
 	return item
+}
+
+func (pq PriorityQueue) Peek() any {
+	return pq[0]
 }
 
 func InitPriorityQueue() *PriorityQueue {
