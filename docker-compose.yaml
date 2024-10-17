@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    restart: always
+    ports:
+      - "8080:8080"
+    command: ["/main"]
+    depends_on:
+      - postgres
+    environment:
+      ENVIRONMENT: "local"
+
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: "username"
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_DB: orderbook
+    ports:
+      - "5432:5432"
+    networks:
+      - db
+
+networks:
+  db:
+    driver: bridge
