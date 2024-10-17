@@ -2,15 +2,16 @@ package main
 
 import (
 	"net/http"
-	"orderbook/internal/api"
 
 	"github.com/gin-gonic/gin"
+
+	"orderbook/internal/routes"
 )
 
 func main() {
 	r := gin.Default()
 
-	api.RegisterRoutes(r)
+	routes.Run(r)
 
 	// Ping test
 	r.GET("/ping", func(c *gin.Context) {
