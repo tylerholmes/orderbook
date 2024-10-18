@@ -1,7 +1,7 @@
 # Order Book
 
 ## Overview
-The **Order Book Project** is a stock trading application designed to simulate a real-time order book system, allowing users to place buy and sell orders for stocks. Built with Go and the Gin framework for the backend, React for the frontend, PostgreSQL for the database,
+The **Order Book Project** is a stock trading application designed to simulate a real-time order book system, allowing users to place buy and sell orders for stocks. Built with Go and the Gin framework for the backend, React for the frontend, PostgreSQL for the database, and containerized with Docker.
 
 ## Project Structure
 ```
