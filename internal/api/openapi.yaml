@@ -1,0 +1,136 @@
+openapi: 3.0.0
+info:
+  title: Order Book API
+  description: API for managing buy/sell orders and executing trades
+  version: "1.0.0"
+servers:
+  - url: http://localhost:8080
+    description: Local server
+
+paths:
+  /orders:
+    post:
+      summary: Place a new order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        "200":
+          description: Order placed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  order_id:
+                    type: integer
+
+  /orders/{order_id}:
+    delete:
+      summary: Cancel an existing order
+      parameters:
+        - in: path
+          name: order_id
+          schema:
+            type: integer
+          required: true
+          description: ID of the order to be canceled
+      responses:
+        "200":
+          description: Order canceled successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  order_id:
+                    type: integer
+
+  /orderbook/{stock_id}:
+    get:
+      summary: Get the order book for a specific stock
+      parameters:
+        - in: path
+          name: stock_id
+          schema:
+            type: integer
+          required: true
+          description: ID of the stock
+      responses:
+        "200":
+          description: Order book fetched successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  buy_orders:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Order'
+                  sell_orders:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Order'
+
+  /trade:
+    post:
+      summary: Execute a trade between buy/sell orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TradeRequest'
+      responses:
+        "200":
+          description: Trade executed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  trade_id:
+                    type: integer
+
+components:
+  schemas:
+    Order:
+      type: object
+      properties:
+        order_id:
+          type: integer
+        stock_id:
+          type: integer
+        user_id:
+          type: integer
+        type:
+          type: string
+          enum: [buy, sell]
+        price:
+          type: number
+          format: float
+        quantity:
+          type: integer
+        status:
+          type: string
+          enum: [open, filled, cancelled]
+
+    TradeRequest:
+      type: object
+      properties:
+        buy_order_id:
+          type: integer
+        sell_order_id:
+          type: integer
+        quantity:
+          type: integer
