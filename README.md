@@ -2,6 +2,8 @@
 
 A simple orderbook system implemented in Go. Features limit and market orders, price matching engine, and Postgres database for persistence.
 
+Project worked on in my freetime to learn Go some more and learn how orderbooks work. Third attempt at making this 
+
 ## Overview
 
 This project implements a basic trading platform with the following features:
