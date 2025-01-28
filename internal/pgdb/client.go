@@ -36,7 +36,6 @@ func (d *Database) Initialize() error {
 	return err
 }
 
-// in internal/pgdb/client.go
 func (d *Database) SaveOrder(order *models.Order) error {
 	query := `
         INSERT INTO orders (

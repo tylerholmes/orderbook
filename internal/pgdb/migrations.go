@@ -117,31 +117,3 @@ BEGIN
     ON CONFLICT (email) DO NOTHING;
 END $$;
 `
-
-// Additional migrations functions if needed
-func (d *Database) Migrate() error {
-	_, err := d.db.Exec(schema)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-// Function to reset the database (useful for testing)
-func (d *Database) ResetDatabase() error {
-	resetSQL := `
-    DROP TABLE IF EXISTS order_history CASCADE;
-    DROP TABLE IF EXISTS trades CASCADE;
-    DROP TABLE IF EXISTS orders CASCADE;
-    DROP TABLE IF EXISTS symbols CASCADE;
-    DROP TABLE IF EXISTS users CASCADE;
-    `
-
-	_, err := d.db.Exec(resetSQL)
-	if err != nil {
-		return err
-	}
-
-	// Re-run migrations
-	return d.Migrate()
-}
