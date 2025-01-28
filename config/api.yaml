@@ -1,0 +1,106 @@
+openapi: 3.0.0
+info:
+  title: Orderbook API
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /orders:
+    post:
+      summary: Place a new order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          description: Order placed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+    get:
+      summary: Get all orders
+      responses:
+        '200':
+          description: List of orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+                  
+  /orderbook/{symbol}:
+    get:
+      summary: Get orderbook for a symbol
+      parameters:
+        - name: symbol
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Orderbook data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Orderbook'
+
+components:
+  schemas:
+    Order:
+      type: object
+      required:
+        - symbol
+        - side
+        - quantity
+        - price
+      properties:
+        id:
+          type: string
+        symbol:
+          type: string
+        side:
+          type: string
+          enum: [buy, sell]
+        quantity:
+          type: number
+        price:
+          type: number
+        status:
+          type: string
+          enum: [pending, filled, partially_filled, cancelled]
+          
+    OrderResponse:
+      type: object
+      properties:
+        orderId:
+          type: string
+        status:
+          type: string
+          
+    Orderbook:
+      type: object
+      properties:
+        symbol:
+          type: string
+        bids:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceLevel'
+        asks:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceLevel'
+            
+    PriceLevel:
+      type: object
+      properties:
+        price:
+          type: number
+        quantity:
+          type: number
