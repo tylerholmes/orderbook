@@ -27,10 +27,10 @@ CREATE TABLE IF NOT EXISTS symbols (
 -- Orders table
 CREATE TABLE IF NOT EXISTS orders (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id UUID REFERENCES users(id), -- Made nullable for testing
+    user_id UUID REFERENCES users(id),
     symbol VARCHAR(20) NOT NULL REFERENCES symbols(symbol),
     side VARCHAR(4) NOT NULL CHECK (side IN ('buy', 'sell')),
-    order_type VARCHAR(10) NOT NULL CHECK (order_type IN ('market', 'limit')),
+    order_type VARCHAR(10) NOT NULL CHECK (order_type IN ('limit', 'market')),
     quantity DECIMAL(18,8) NOT NULL CHECK (quantity > 0),
     filled_qty DECIMAL(18,8) NOT NULL DEFAULT 0 CHECK (filled_qty >= 0),
     price DECIMAL(18,8) CHECK (price > 0),
