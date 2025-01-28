@@ -55,12 +55,12 @@ curl http://localhost:8080/orders
 
 #### Get Orderbook for Symbol
 ```bash
-curl http://localhost:8080/orderbook/AAPL
+curl http://localhost:8080/orderbook/NVDA
 ```
 
 #### Get Market Price
 ```bash
-curl http://localhost:8080/market-price/AAPL
+curl http://localhost:8080/market-price/NVDA
 ```
 
 #### Cancel Order
