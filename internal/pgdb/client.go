@@ -1,4 +1,4 @@
-package database
+package pgdb
 
 import (
 	"database/sql"
