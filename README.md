@@ -69,3 +69,12 @@ curl http://localhost:8080/market-price/NVDA
 ```bash
 curl -X DELETE http://localhost:8080/orders/{orderID}
 ```
+
+Todo:
+- [ ] Fix saving trades
+- [ ] Fix order status changes & order history
+- [ ] Cache AlphaVantage responses
+- [ ] Add tests
+- [ ] Add user authentication
+- [ ] Add more error handling
+- [ ] Add more logging
